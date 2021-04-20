@@ -16,9 +16,7 @@ pipeline {
                 sh 'echo "Build Completed."'
             }
         }
-        stage('Code Quantity') {
 
-        }
         stage('Test') {
             steps {
                 sh 'mvn test'
@@ -29,26 +27,6 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
-            steps {
-                sh 'mvn -B -DskipTests -s settings.xml clean deploy'
-            }
-        }
-        stage('Package') {
-            steps {
-                withCredentials([string(credentialsId: 'DockerHub', variable: 'TOKEN')]) {
-                    sh "docker login -u 'ndoan6' -p '03791476-a1b4-4936-a5f8-9acbba2c1816' docker.io"
-                    sh "docker build -t myapp:latest --tag ndoan6/samplejava:myapp ."
-                    sh "docker push ndoan6/samplejava:myapp"
-                }
-            }
-        }
-        stage('Build Results') {
-            echo 'Build ${BUILD_NAME} completed successfully'
-            steps {
-                sh "chmod +x -R ${env.WORKSPACE}"
-                sh "docker run myapp:latest"
-            }
-        }
+
     }
 }
