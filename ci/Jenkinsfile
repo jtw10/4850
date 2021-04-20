@@ -32,12 +32,9 @@ pipeline {
                 expression {
                     params.RUN == true
                 }
-                steps {
-                    sh 'deliver.sh'
-                }
             }
             steps {
-                sh 'mvn -B -DskipTests -s settings.xml clean deploy'
+               sh 'deliver.sh'
             }
         }
         stage('Build Results') {
