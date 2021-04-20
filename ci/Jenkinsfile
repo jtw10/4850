@@ -47,7 +47,7 @@ pipeline {
                 }
             }
             steps {
-               sh 'scripts/deliver.sh'
+               sh 'deliver.sh'
             }
         }
         stage('Build Results') {
