@@ -27,8 +27,20 @@ pipeline {
                 }
             }
         }
+        stage('Run') {
+            when {
+                expression {
+                    params.RUN == true
+                }
+                steps {
+                    sh 'deliver.sh'
+                }
+            }
+            steps {
+                sh 'mvn -B -DskipTests -s settings.xml clean deploy'
+            }
+        }
         stage('Build Results') {
-            
             steps {
                 sh "echo 'Build ${BUILD_NAME} completed successfully'"
                 sh "echo 'I have now compelted ACIT 4850!'"
