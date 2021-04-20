@@ -27,6 +27,12 @@ pipeline {
                 }
             }
         }
-
+        stage('Build Results') {
+            
+            steps {
+                sh "echo 'Build ${BUILD_NAME} completed successfully'"
+                sh "echo 'I have now compelted ACIT 4850!'"
+            }
+        }
     }
 }
